@@ -1,0 +1,48 @@
+﻿@using TurtleCommandWebApp.Models
+@model TurtleCommandWebApp.Models.TurtleCommand
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="form-turtle-command panel panel-default">
+        <div class="div-turtle-command">X (position)</div>
+        <div class="div-turtle-command">@Html.TextBoxFor(model => model.X, "", new { @class = "text-input form-control" })</div>
+        <div class="div-row-separator">@Html.ValidationMessageFor(model => model.X, "", new { @class = "text-danger" })</div>
+
+        <div class="div-turtle-command">Y (position)</div>
+        <div class="div-turtle-command">@Html.TextBoxFor(model => model.Y, "", new { @class = "text-input form-control" })</div>
+        <div class="div-row-separator">@Html.ValidationMessageFor(model => model.Y, "", new { @class = "text-danger" })</div>
+
+
+        <div class="div-turtle-command">Facing</div>
+        <div class="div-turtle-command">
+            @Html.DropDownList("Facing", new SelectList(Enum.GetValues(typeof(Direction))),
+            "Select", new { @class = "form-control" })
+        </div>
+        <div class="div-row-separator">@Html.ValidationMessageFor(model => model.Facing, "", new { @class = "text-danger" })</div>
+
+
+
+        <hr />
+        <p>
+            <input type="submit" id="btnPlace" name="Command" value="Place" class="btn btn-primary turtle-command" />            
+            <br />
+            @{
+                if (Model != null)
+                {                    
+                    <input type="submit" id="btnMove" name="Command" value="Move" class="btn btn-primary turtle-command" />
+                    <br />
+                    <input type="submit" id="btnLeft" name="Command" value="Left" class="btn btn-primary turtle-command" />                    
+                    <input type="submit" id="btnRight" name="Command" value="Right" class="btn btn-primary turtle-command" />
+                    <br />
+                    <input type="submit" id="btnReport" name="Command" value="Report" class="btn btn-primary turtle-command" />
+                }
+            }
+        </p>
+
+        <p id="text-result">@ViewBag.Result</p>
+    </div>
+                }
